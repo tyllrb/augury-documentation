@@ -1,6 +1,6 @@
 ![Image Module App](images/app.png)
 
-[Launch Demo App](https://augury.angular.io/examples/)
+[Launch Demo App](https://augury.angular.io/examples/module/app)
 
 ## Description
 
