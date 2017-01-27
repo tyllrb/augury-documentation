@@ -12,7 +12,7 @@ The _Song List_ application is composed of two modules. One, the root applicatio
 
 ![Module Breakdown](images/module-breakdown.png)
 
-The Songs Module is a _feature_ module, which exports a component, `SongsComponent` that can be used throughtout the application. This is used in the `AppComponent`, which is our _root_ component that will bootsdqtrap the application.
+The Songs Module is a _feature_ module, which exports a component, `SongsComponent` that can be used throughtout the application. This is used in the `AppComponent`, which is our _root_ component that will bootstrap the application.
 
 The architecture of the _Song Module_ is pretty straightforward. The `SongsComponent` contains the search field in its _template_, and has the `SongService` injected as a dependency. When the user searches for a term, the `SongService` is invoked to perform a GET request, which returns an array of results. This dataset is passed to the `SongListComponent` which will use the `SongPipe` to display the album art, song title, and the name of the artist. 
 
@@ -95,7 +95,7 @@ The `SongsModule` also uses the `SongService` as seen under the provider section
 
 Lets take a look at the definition of the Song Module, open up `src/app/modules/songs.module.ts`:
 
-```js
+``` js
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -119,10 +119,10 @@ import {SongService} from '../services/songs.service';
   ],
   providers: [
     SongService
-  ],																																																																													
+  ],													
   exports: [
     SongsComponent
-  ]																																																						
+  ]			
 })
 export class SongsModule {}
 ```
@@ -131,7 +131,7 @@ Just like our root module, Augury has picked out the `imports`, `declarations`, 
 
 One important thing to take note of is that _Module List_ does not include any resources (pipes, providers, directives, components, etc) that a module may use, just the resources definied by `NgModule`. For example, open up the `SongListComponent` (`components/song-list/song-list.component.ts`), here is what it should look like:
 
-```js
+``` js
 export class SongListComponent {
   @Input() songs: any;
 
@@ -146,11 +146,11 @@ export class SongListComponent {
 }
 ```
 
-The `SongListComponent` uses the `Logger` service via dependency injection that has been made available from the `AppModule`. Since the `AppModule` is at the root of the applications dependency injection hierarchy, the `SongListComponent` can use any of its providers. However, since the `Logger service` is defined in the `AppModule`, Augury will list this service under the providers section of the `AppModule`. It is not included in the section of the `SongsModule`, even though the `SongsModule` uses this service. To get a better sense of dependency injection throughout our application we should use Augury's [Dependency Injection Tree](https://placeholder.com). 
+The `SongListComponent` uses the `Logger` service via dependency injection that has been made available from the `AppModule`. Since the `AppModule` is at the root of the applications dependency injection hierarchy, the `SongListComponent` can use any of its providers. However, since the `Logger service` is defined in the `AppModule`, Augury will list this service under the providers section of the `AppModule`. It is not included in the section of the `SongsModule`, even though the `SongsModule` uses this service. To get a better sense of dependency injection throughout our application we should use Augury's Dependency Injection Tree. 
 
 Lets see what happens when we remove the `SongService` from the provider list in the `SongModule` definition and move it to the provider list in the `SongsComponent` component definition. Here is what `SongsComponent` will look like:
 
-```js
+``` js
 @Component({
   selector: 'my-songs',
   styleUrls: ['./songs.component.css'],
@@ -178,4 +178,3 @@ Augury has picked up what we've done and has noticed that the `SongService` is n
 ![Module List 4](images/module-list-4.png)
 
 This comes in handy as Auguary is able to pick up and list all services that a module provides, whether or not they are included in the module providers, or via specific component providers. 
-
