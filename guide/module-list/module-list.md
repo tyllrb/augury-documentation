@@ -1,6 +1,6 @@
-![Image Module App](images/app.png)
+![Image Module App](images/app-module-demo.png)
 
-[Launch Demo App](https://augury.angular.io/examples/module/app)
+[Launch Demo App](https://augury.angular.io/examples/modules/app)
 
 ## Description
 
@@ -36,7 +36,7 @@ The _Module List_ feature lists all the modules in the application. The first mo
 
 To see where Augury gets this information from, open up `app.module.ts` and take a look at the `AppModule` source code:
 
-``` js
+```js
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -95,7 +95,7 @@ The `SongsModule` also uses the `SongService` as seen under the provider section
 
 Lets take a look at the definition of the Song Module, open up `src/app/modules/songs.module.ts`:
 
-``` js
+```js
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -131,7 +131,7 @@ Just like our root module, Augury has picked out the `imports`, `declarations`, 
 
 One important thing to take note of is that _Module List_ does not include any resources (pipes, providers, directives, components, etc) that a module may use, just the resources definied by `NgModule`. For example, open up the `SongListComponent` (`components/song-list/song-list.component.ts`), here is what it should look like:
 
-``` js
+```js
 export class SongListComponent {
   @Input() songs: any;
 
@@ -150,7 +150,7 @@ The `SongListComponent` uses the `Logger` service via dependency injection that 
 
 Lets see what happens when we remove the `SongService` from the provider list in the `SongModule` definition and move it to the provider list in the `SongsComponent` component definition. Here is what `SongsComponent` will look like:
 
-``` js
+```js
 @Component({
   selector: 'my-songs',
   styleUrls: ['./songs.component.css'],
